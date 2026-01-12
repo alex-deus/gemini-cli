@@ -1,0 +1,58 @@
+[project]
+name = "gemini-cli"
+version = "0.0.1"
+description = "CLI for making images via Gemini"
+package-mode = false
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Alex Deus"}
+]
+keywords = ["ElevenLabs", "AI", "Voice Generator", "TTS"]
+dependencies = [
+    "click (>=8.3.1,<9.0.0)",
+    "google-genai (>=1.57.0,<2.0.0)"
+]
+
+[project.urls]
+Homepage = "https://github.com/alex-deus/gemini-cli"
+Repository = "https://github.com/alex-deus/gemini-cli"
+Issues = "https://github.com/alex-deus/gemini-cli/issues"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.0"
+isort = "^5.13.2"
+seed-isort-config = "^2.2.0"
+black = "^23.12.1"
+flake8 = "^7.0.0"
+autoflake = "^2.2.1"
+bandit = "^1.7.6"
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.git
+  | .idea
+  | .kiro
+  | .vscode
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 120
+include_trailing_comma = true
+sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
+known_third_party = ["click", "google"]
+
+[tool.bandit]
+exclude_dirs = []
+skips = []
