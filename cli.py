@@ -33,16 +33,16 @@ def run(image_input: Path, prompt: str, extra_images: tuple[Path, ...], image_ou
         image_output = f"results/{datetime.utcnow().isoformat()}.png"
 
     # Load Google's Creds
-    json_file_path = getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    json_file_path: str = getenv("GOOGLE_APPLICATION_CREDENTIALS")
     with open(json_file_path) as f:
-        google_creds_data = json.load(f)
+        google_creds_data: dict = json.load(f)
 
     client = genai.Client(vertexai=True, project=google_creds_data["project_id"])
 
-    parts = []
+    parts: list[genai.types.Part] = []
 
     # Load input image
-    image = _load_image(image_input)
+    image: genai.types.Part = _load_image(image_input)
     parts.append(image)
 
     # Load extra images
@@ -50,7 +50,7 @@ def run(image_input: Path, prompt: str, extra_images: tuple[Path, ...], image_ou
         parts.append(_load_image(img))
 
     # Load prompt
-    part = genai.types.Part.from_text(text=prompt)
+    part: genai.types.Part = genai.types.Part.from_text(text=prompt)
     parts.append(part)
 
     # Make config
